@@ -10,7 +10,7 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({origin : "http://localhost:5173"}));
+app.use(cors({origin : "https://shortner-2odfd7hv3-mohammed-azhans-projects.vercel.app"}));
 const port = process.env.PORT;
 app.get("/", (req, res) => {
     res.send("Hello");
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 app.post("/shortenurl", async (req, res) => {
     const url = req.body.url;
     const generateId = nanoid(5);
-    const newUrl = `http://localhost:5173/${generateId}`
+    const newUrl = `https://shortner-2odfd7hv3-mohammed-azhans-projects.vercel.app/${generateId}`
     const insertData = await new urlModel
     (
         {
@@ -32,7 +32,7 @@ app.post("/shortenurl", async (req, res) => {
     return res.status(500).json({status : false});
 })
 app.post("/returnOriginal", async (req, res) => {
-    const url =  `http://localhost:5173/${req.body.url}`;
+    const url =  `https://shortner-2odfd7hv3-mohammed-azhans-projects.vercel.app/${req.body.url}`;
     const findUrl = await urlModel.findOne({shortUrl : url});
     if(findUrl){
         findUrl.visited = findUrl.visited + 1;
