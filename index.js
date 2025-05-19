@@ -8,9 +8,10 @@ import urlModel from "./models/urlModel.js";
 
 dotenv.config();
 
+
 const app = express();
 app.use(express.json());
-app.use(cors({origin : "https://shortner-cjxwxkbnk-mohammed-azhans-projects.vercel.app"}));
+app.use(cors({origin : "https://shortner-nu.vercel.app"}));
 const port = process.env.PORT;
 app.get("/", (req, res) => {
     res.send("Hello");
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
 app.post("/shortenurl", async (req, res) => {
     const url = req.body.url;
     const generateId = nanoid(5);
-    const newUrl = `https://shortner-cjxwxkbnk-mohammed-azhans-projects.vercel.app/${generateId}`
+    const newUrl = `https://shortner-nu.vercel.app/${generateId}`
     const insertData = await new urlModel
     (
         {
@@ -32,7 +33,7 @@ app.post("/shortenurl", async (req, res) => {
     return res.status(500).json({status : false});
 })
 app.post("/returnOriginal", async (req, res) => {
-    const url =  `https://shortner-cjxwxkbnk-mohammed-azhans-projects.vercel.app/${req.body.url}`;
+    const url =  `https://shortner-nu.vercel.app/${req.body.url}`;
     const findUrl = await urlModel.findOne({shortUrl : url});
     if(findUrl){
         findUrl.visited = findUrl.visited + 1;
